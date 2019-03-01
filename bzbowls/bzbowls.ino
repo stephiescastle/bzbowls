@@ -131,53 +131,53 @@ int toggle14State = HIGH;
 
 
 // Set modeA interval (*15)
-float modeAt0 =  10;
-float modeAt1 =  10;
-float modeAt2 =  10;
-float modeAt3 =  10;
-float modeAt4 =  10;
-float modeAt5 =  10;
-float modeAt6 =  10;
-float modeAt7 =  10;
-float modeAt8 =  10;
-float modeAt9 =  10;
-float modeAt10 = 10;
-float modeAt11 = 10;
-float modeAt12 = 10;
-float modeAt13 = 10;
-float modeAt14 = 10;
+// float modeAt0 =  10;
+// float modeAt1 =  10;
+// float modeAt2 =  10;
+// float modeAt3 =  10;
+// float modeAt4 =  10;
+// float modeAt5 =  10;
+// float modeAt6 =  10;
+// float modeAt7 =  10;
+// float modeAt8 =  10;
+// float modeAt9 =  10;
+// float modeAt10 = 10;
+// float modeAt11 = 10;
+// float modeAt12 = 10;
+// float modeAt13 = 10;
+// float modeAt14 = 10;
 
 // Set the active interval (*15)
-// float t0 =  285;
-// float t1 =  290;
-// float t2 =  295;
-// float t3 =  185;
-// float t4 =  190;
-// float t5 =  195;
-// float t6 =  385;
-// float t7 =  390;
-// float t8 =  395;
-// float t9 =  125;
-// float t10 = 130;
-// float t11 = 135;
-// float t12 = 325;
-// float t13 = 330;
-// float t14 = 335;
-float t0 =  10;
-float t1 =  10;
-float t2 =  10;
-float t3 =  10;
-float t4 =  10;
-float t5 =  10;
-float t6 =  10;
-float t7 =  10;
-float t8 =  10;
-float t9 =  10;
-float t10 = 10;
-float t11 = 10;
-float t12 = 10;
-float t13 = 10;
-float t14 = 10;
+ float t0 =  285;
+ float t1 =  290;
+ float t2 =  295;
+ float t3 =  185;
+ float t4 =  190;
+ float t5 =  195;
+ float t6 =  385;
+ float t7 =  390;
+ float t8 =  395;
+ float t9 =  125;
+ float t10 = 130;
+ float t11 = 135;
+ float t12 = 325;
+ float t13 = 330;
+ float t14 = 335;
+//float t0 =  10;
+//float t1 =  10;
+//float t2 =  10;
+//float t3 =  10;
+//float t4 =  10;
+//float t5 =  10;
+//float t6 =  10;
+//float t7 =  10;
+//float t8 =  10;
+//float t9 =  10;
+//float t10 = 10;
+//float t11 = 10;
+//float t12 = 10;
+//float t13 = 10;
+//float t14 = 10;
 
 // Set the rest interval (*15)
 float t0rest =  215; 
@@ -273,21 +273,23 @@ void setup()
 }
 
 void loop() {
-  motorcontrol(metro0, motor0, motor0State, t0, t0rest, toggle0Pin, toggle0State, counter0, unit0, modeAt0, modeAgroup1);
-  motorcontrol(metro1, motor1, motor1State, t1, t1rest, toggle1Pin, toggle1State, counter1, unit0, modeAt1, modeAgroup1);
-  motorcontrol(metro2, motor2, motor2State, t2, t2rest, toggle2Pin, toggle2State, counter2, unit0, modeAt2, modeAgroup1);
-  motorcontrol(metro3, motor3, motor3State, t3, t3rest, toggle3Pin, toggle3State, counter3, unit1, modeAt3, modeAgroup1);
-  motorcontrol(metro4, motor4, motor4State, t4, t4rest, toggle4Pin, toggle4State, counter4, unit1, modeAt4, modeAgroup1);
-  motorcontrol(metro5, motor5, motor5State, t5, t5rest, toggle5Pin, toggle5State, counter5, unit1, modeAt5, modeAgroup2);
-  motorcontrol(metro6, motor6, motor6State, t6, t6rest, toggle6Pin, toggle6State, counter6, unit2, modeAt6, modeAgroup2);
-  motorcontrol(metro7, motor7, motor7State, t7, t7rest, toggle7Pin, toggle7State, counter7, unit2, modeAt7, modeAgroup2);
-  motorcontrol(metro8, motor8, motor8State, t8, t8rest, toggle8Pin, toggle8State, counter8, unit2, modeAt8, modeAgroup2);
-  motorcontrol(metro9, motor9, motor9State, t9, t9rest, toggle9Pin, toggle9State, counter9, unit3, modeAt9, modeAgroup2);
-  motorcontrol(metro10, motor10, motor10State, t10, t10rest, toggle10Pin, toggle10State, counter10, unit3, modeAt10, modeAgroup3);
-  motorcontrol(metro11, motor11, motor11State, t11, t11rest, toggle11Pin, toggle11State, counter11, unit3, modeAt11, modeAgroup3);
-  motorcontrol(metro12, motor12, motor12State, t12, t12rest, toggle12Pin, toggle12State, counter12, unit4, modeAt12, modeAgroup3);
-  motorcontrol(metro13, motor13, motor13State, t13, t13rest, toggle13Pin, toggle13State, counter13, unit4, modeAt13, modeAgroup3);
-  motorcontrol(metro14, motor14, motor14State, t14, t14rest, toggle14Pin, toggle14State, counter14, unit4, modeAt14, modeAgroup3);
+  motorcontrol(metro0, motor0, motor0State, t0, t0rest, toggle0Pin, toggle0State, counter0, unit0, modeAgroup1);
+  motorcontrol(metro1, motor1, motor1State, t1, t1rest, toggle1Pin, toggle1State, counter1, unit0, modeAgroup1);
+  motorcontrol(metro2, motor2, motor2State, t2, t2rest, toggle2Pin, toggle2State, counter2, unit0, modeAgroup1);
+  motorcontrol(metro3, motor3, motor3State, t3, t3rest, toggle3Pin, toggle3State, counter3, unit1, modeAgroup1);
+  motorcontrol(metro4, motor4, motor4State, t4, t4rest, toggle4Pin, toggle4State, counter4, unit1, modeAgroup1);
+
+  motorcontrol(metro5, motor5, motor5State, t5, t5rest, toggle5Pin, toggle5State, counter5, unit1, modeAgroup2);
+  motorcontrol(metro6, motor6, motor6State, t6, t6rest, toggle6Pin, toggle6State, counter6, unit2, modeAgroup2);
+  motorcontrol(metro7, motor7, motor7State, t7, t7rest, toggle7Pin, toggle7State, counter7, unit2, modeAgroup2);
+  motorcontrol(metro8, motor8, motor8State, t8, t8rest, toggle8Pin, toggle8State, counter8, unit2, modeAgroup2);
+  motorcontrol(metro9, motor9, motor9State, t9, t9rest, toggle9Pin, toggle9State, counter9, unit3, modeAgroup2);
+
+  motorcontrol(metro10, motor10, motor10State, t10, t10rest, toggle10Pin, toggle10State, counter10, unit3, modeAgroup3);
+  motorcontrol(metro11, motor11, motor11State, t11, t11rest, toggle11Pin, toggle11State, counter11, unit3, modeAgroup3);
+  motorcontrol(metro12, motor12, motor12State, t12, t12rest, toggle12Pin, toggle12State, counter12, unit4, modeAgroup3);
+  motorcontrol(metro13, motor13, motor13State, t13, t13rest, toggle13Pin, toggle13State, counter13, unit4, modeAgroup3);
+  motorcontrol(metro14, motor14, motor14State, t14, t14rest, toggle14Pin, toggle14State, counter14, unit4, modeAgroup3);
   
 }
 
@@ -299,7 +301,7 @@ void loop() {
 // usage example:
 // motorcontrol(metro0, motor0, motor0State, t0, t0rest, toggle0Pin, toggle0State, counter0, unit0, modeAgroup1);
 
-void motorcontrol(Metro& metro, int motor, int &motorState, float t, float trest, int togglePin, int toggleState, int &counter, int unit, float modeAt, int modeAgroup) {
+void motorcontrol(Metro& metro, int motor, int &motorState, float t, float trest, int togglePin, int toggleState, int &counter, int unit, int modeAgroup) {
   if (metro.check() == 1) { // check if the metro has passed its interval
 
     // see if installation of performance mode
@@ -312,6 +314,9 @@ void motorcontrol(Metro& metro, int motor, int &motorState, float t, float trest
 
       // NEW MODE FOR BZBOWLS
       // on/off with separate PWM control for 3 groups of 5
+
+      // no variable interval in modeA
+      metro.interval(10);
       
       // use first knob to control note-on length (t)
       // knob0Value = 1023 - analogRead(knob0Pin); // invert because hooked up backwards
@@ -374,25 +379,26 @@ void motorcontrol(Metro& metro, int motor, int &motorState, float t, float trest
     
     
     if( modeState == LOW ) {
-
-      // use third knob to control motor strength (pwm)
-      // knob2Value = 1023 - analogRead(knob2Pin); // invert because hooked up backwards
-      // knob2Value = knob2Value * knob2Value;
-      // knob2Value = knob2Value / 1309; // "ease in-out"
-      // knob2Mapped = map(knob2Value, 0, 799, 0, 255);
-      // pwm = knob2Mapped;    
-  
-      // // use second knob to control note-off length (trest)
-      // knob1Value = 1023 - analogRead(knob1Pin); // invert because hooked up backwards
-      // knob1Value = knob1Value * knob1Value;
-      // knob1Value = knob1Value / 1309; // "ease in-out"
-      // knob1Mapped = mapf(knob1Value, 0, 1023, 1, 15);
-      // trest = trest*knob1Mapped;
-
+      // BELL CONTROLLER
+      
       // use first knob to control note-on length (t)
       knob0Value = 1023 - analogRead(knob0Pin); // invert because hooked up backwards
       knob0Mapped = mapf(knob0Value, 0, 1023, 1, 8);
       t = t*knob0Mapped;
+      
+      // use third knob to control motor strength (pwm)
+      knob2Value = 1023 - analogRead(knob2Pin); // invert because hooked up backwards
+      knob2Value = knob2Value * knob2Value;
+      knob2Value = knob2Value / 1309; // "ease in-out"
+      knob2Mapped = map(knob2Value, 0, 799, 0, 255);
+      pwm = knob2Mapped;    
+      
+      // use second knob to control note-off length (trest)
+      knob1Value = 1023 - analogRead(knob1Pin); // invert because hooked up backwards
+      knob1Value = knob1Value * knob1Value;
+      knob1Value = knob1Value / 1309; // "ease in-out"
+      knob1Mapped = mapf(knob1Value, 0, 1023, 1, 15);
+      trest = trest*knob1Mapped;
 
       // FSR sensor to control overall speed with fast/slow modes
       sensormodeState = digitalRead(sensormodePin);
