@@ -57,7 +57,10 @@ int pwm = 255;
 int pwmgp = 60;
 int on = 255;
 int pwmHi = 255;
-int pwmLo = 55;
+int pwmLo = 50;
+int pwm1 = pwm;
+int pwm2 = pwm;
+int pwm3 = pwm;
 
 // Define motors pins (*15)
 const int motor0 =  13;
@@ -75,6 +78,7 @@ const int motor11 =  2;
 const int motor12 = 44;
 const int motor13 = 45;
 const int motor14 = 46;
+
 // Define motor states (*15)
 int motor0State =  pwm;
 int motor1State =  pwm;
@@ -232,9 +236,9 @@ int counter14 = 1;
 
 // how many times to do pattern before it reevaluates itself (way arbitrary)
 //ModeA
-boolean modeAgroup1 = true;
-boolean modeAgroup2 = true;
-boolean modeAgroup3 = true;
+int modeAgroup1 = 1;
+int modeAgroup2 = 2;
+int modeAgroup3 = 3;
 
 //ModeB
 int unit0 = 9;
@@ -295,26 +299,11 @@ void loop() {
 // usage example:
 // motorcontrol(metro0, motor0, motor0State, t0, t0rest, toggle0Pin, toggle0State, counter0, unit0, modeAgroup1);
 
-void motorcontrol(Metro& metro, int motor, int &motorState, float t, float trest, int togglePin, int toggleState, int &counter, int unit, float modeAt, boolean modeAgroup) {
+void motorcontrol(Metro& metro, int motor, int &motorState, float t, float trest, int togglePin, int toggleState, int &counter, int unit, float modeAt, int modeAgroup) {
   if (metro.check() == 1) { // check if the metro has passed its interval
 
     // see if installation of performance mode
     modeState = digitalRead(modePin);
-    Serial.println(modeState);
-
-    // use third knob to control motor strength (pwm)
-    knob2Value = 1023 - analogRead(knob2Pin); // invert because hooked up backwards
-    knob2Value = knob2Value * knob2Value;
-    knob2Value = knob2Value / 1309; // "ease in-out"
-    knob2Mapped = map(knob2Value, 0, 799, 0, 255);
-    pwm = knob2Mapped;    
-
-    // use second knob to control note-off length (trest)
-    knob1Value = 1023 - analogRead(knob1Pin); // invert because hooked up backwards
-    knob1Value = knob1Value * knob1Value;
-    knob1Value = knob1Value / 1309; // "ease in-out"
-    knob1Mapped = mapf(knob1Value, 0, 1023, 1, 15);
-    trest = trest*knob1Mapped;
 
     // to turn motors on/off in either mode
     toggleState = digitalRead(togglePin); 
@@ -329,6 +318,26 @@ void motorcontrol(Metro& metro, int motor, int &motorState, float t, float trest
       // knob0Mapped = mapf(knob0Value, 0, 1023, 1, 8);
       // t = t*knob0Mapped;
 
+      // READ KNOBS AS PWM CONTROL
+      knob0Value = 1023 - analogRead(knob0Pin); // invert because hooked up backwards
+      knob0Value = knob0Value * knob0Value;
+      knob0Value = knob0Value / 1309; // "ease in-out"
+      knob0Mapped = map(knob0Value, 0, 799, 0, 255);
+      pwm1 = knob0Mapped;
+      
+      knob1Value = 1023 - analogRead(knob1Pin); // invert because hooked up backwards
+      knob1Value = knob1Value * knob1Value;
+      knob1Value = knob1Value / 1309; // "ease in-out"
+      knob1Mapped = map(knob1Value, 0, 799, 0, 255);
+      pwm2 = knob1Mapped;
+
+      knob2Value = 1023 - analogRead(knob2Pin); // invert because hooked up backwards
+      knob2Value = knob2Value * knob2Value;
+      knob2Value = knob2Value / 1309; // "ease in-out"
+      knob2Mapped = map(knob2Value, 0, 799, 0, 255);
+      pwm3 = knob2Mapped;
+
+
       // FSR sensor to control overall speed with fast/slow modes
       sensormodeState = digitalRead(sensormodePin);
       sensorValue = analogRead(sensorPin);
@@ -336,15 +345,25 @@ void motorcontrol(Metro& metro, int motor, int &motorState, float t, float trest
       sensorValue = sensorValue / 1309; // "ease in-out"
          
       if( toggleState == LOW ) {
+        // if it's off, it's off
         motorState=off;
         analogWrite(motor,motorState);
       } else if ( toggleState == HIGH ) { // if motor is switched on
-
-        if(sensorValue > 0) { // if sensor activated
+        if(sensorValue > 0) { 
+          // if sensor activated, assign PWM level according to sensor mode
           if(sensormodeState == HIGH ) { // and set to high
             pwm = pwmHi;
           } else if ( sensormodeState == LOW ) {
             pwm = pwmLo;
+          }
+        } else {
+          // if sensor unused, assign pwm level according to group
+          if (modeAgroup == 1) {
+            pwm=pwm1;
+          } else if (modeAgroup == 2) {
+            pwm=pwm2;
+          } else if (modeAgroup == 3) {
+            pwm=pwm3;
           }
         }
         motorState=pwm;
@@ -355,6 +374,20 @@ void motorcontrol(Metro& metro, int motor, int &motorState, float t, float trest
     
     
     if( modeState == LOW ) {
+
+      // use third knob to control motor strength (pwm)
+      // knob2Value = 1023 - analogRead(knob2Pin); // invert because hooked up backwards
+      // knob2Value = knob2Value * knob2Value;
+      // knob2Value = knob2Value / 1309; // "ease in-out"
+      // knob2Mapped = map(knob2Value, 0, 799, 0, 255);
+      // pwm = knob2Mapped;    
+  
+      // // use second knob to control note-off length (trest)
+      // knob1Value = 1023 - analogRead(knob1Pin); // invert because hooked up backwards
+      // knob1Value = knob1Value * knob1Value;
+      // knob1Value = knob1Value / 1309; // "ease in-out"
+      // knob1Mapped = mapf(knob1Value, 0, 1023, 1, 15);
+      // trest = trest*knob1Mapped;
 
       // use first knob to control note-on length (t)
       knob0Value = 1023 - analogRead(knob0Pin); // invert because hooked up backwards
