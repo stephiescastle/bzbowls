@@ -407,8 +407,40 @@ void motorcontrol(Metro& metro, int motor, int &motorState, float t, float trest
       sensorValue = sensorValue / 1309; // "ease in-out"
          
       if( toggleState == LOW ) {
-        motorState=off;
-        analogWrite(motor,motorState);
+//        motorState=off;
+//        analogWrite(motor,motorState);
+
+        // try installation mode here?
+
+        // motor on
+        if( counter % unit == 0 ) {
+          // do something special
+          int randomize = random(0,2);
+          if (randomize == 0) { // can either do a sustain or a pause
+            motorState=off;
+            metro.interval(trest*installationgp); // big ass pause
+          } else {
+            motorState=pwmgp;
+            metro.interval(trest*installationgp); // t*installationgp // big ass sustain      
+          }      
+          analogWrite(motor,motorState);     
+        } else {
+          // do something normal -- chirps
+          // make this fancier
+          if (motorState != off)  { 
+            motorState=off;
+            metro.interval(trest*installationrest); // rest between chirps
+          } else {
+            motorState=pwm;
+            metro.interval(t); // original chirp speed
+          }
+          analogWrite(motor,motorState);
+        }
+        counter = counter+1;
+
+        
+
+        
       } 
       
       if( toggleState == HIGH ) {
