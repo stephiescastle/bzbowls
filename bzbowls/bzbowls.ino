@@ -62,6 +62,11 @@ int pwm1 = pwm;
 int pwm2 = pwm;
 int pwm3 = pwm;
 
+//ModeA Groups
+int modeAgroup1 = 1;
+int modeAgroup2 = 2;
+int modeAgroup3 = 3;
+
 // Define motors pins (*15)
 const int motor0 =  13;
 const int motor1 =  12;
@@ -112,6 +117,7 @@ const int toggle11Pin = 33;
 const int toggle12Pin = 34;
 const int toggle13Pin = 35;
 const int toggle14Pin = 36;
+
 // Define toggle states (*15)
 int toggle0State =  HIGH;
 int toggle1State =  HIGH;
@@ -129,24 +135,6 @@ int toggle12State = HIGH;
 int toggle13State = HIGH;
 int toggle14State = HIGH;
 
-
-// Set modeA interval (*15)
-// float modeAt0 =  10;
-// float modeAt1 =  10;
-// float modeAt2 =  10;
-// float modeAt3 =  10;
-// float modeAt4 =  10;
-// float modeAt5 =  10;
-// float modeAt6 =  10;
-// float modeAt7 =  10;
-// float modeAt8 =  10;
-// float modeAt9 =  10;
-// float modeAt10 = 10;
-// float modeAt11 = 10;
-// float modeAt12 = 10;
-// float modeAt13 = 10;
-// float modeAt14 = 10;
-
 // Set the active interval (*15)
  float t0 =  285;
  float t1 =  290;
@@ -163,21 +151,6 @@ int toggle14State = HIGH;
  float t12 = 325;
  float t13 = 330;
  float t14 = 335;
-//float t0 =  10;
-//float t1 =  10;
-//float t2 =  10;
-//float t3 =  10;
-//float t4 =  10;
-//float t5 =  10;
-//float t6 =  10;
-//float t7 =  10;
-//float t8 =  10;
-//float t9 =  10;
-//float t10 = 10;
-//float t11 = 10;
-//float t12 = 10;
-//float t13 = 10;
-//float t14 = 10;
 
 // Set the rest interval (*15)
 float t0rest =  215; 
@@ -235,11 +208,6 @@ int counter13 = 1;
 int counter14 = 1;
 
 // how many times to do pattern before it reevaluates itself (way arbitrary)
-//ModeA
-int modeAgroup1 = 1;
-int modeAgroup2 = 2;
-int modeAgroup3 = 3;
-
 //ModeB
 int unit0 = 9;
 int unit1 = 5;
@@ -306,7 +274,6 @@ void motorcontrol(Metro& metro, int motor, int &motorState, float t, float trest
 
     // see if installation of performance mode
     modeState = digitalRead(modePin);
-
     // to turn motors on/off in either mode
     toggleState = digitalRead(togglePin); 
 
@@ -317,11 +284,6 @@ void motorcontrol(Metro& metro, int motor, int &motorState, float t, float trest
 
       // no variable interval in modeA
       metro.interval(10);
-      
-      // use first knob to control note-on length (t)
-      // knob0Value = 1023 - analogRead(knob0Pin); // invert because hooked up backwards
-      // knob0Mapped = mapf(knob0Value, 0, 1023, 1, 8);
-      // t = t*knob0Mapped;
 
       // READ KNOBS AS PWM CONTROL
       knob0Value = 1023 - analogRead(knob0Pin); // invert because hooked up backwards
@@ -407,11 +369,9 @@ void motorcontrol(Metro& metro, int motor, int &motorState, float t, float trest
       sensorValue = sensorValue / 1309; // "ease in-out"
          
       if( toggleState == LOW ) {
-//        motorState=off;
-//        analogWrite(motor,motorState);
-
-        // try installation mode here?
-
+        // motorState=off;
+        // analogWrite(motor,motorState);
+        // "installation mode"
         // motor on
         if( counter % unit == 0 ) {
           // do something special
@@ -437,10 +397,6 @@ void motorcontrol(Metro& metro, int motor, int &motorState, float t, float trest
           analogWrite(motor,motorState);
         }
         counter = counter+1;
-
-        
-
-        
       } 
       
       if( toggleState == HIGH ) {
