@@ -56,6 +56,8 @@ int off = 0;
 int pwm = 255;
 int pwmgp = 60;
 int on = 255;
+int pwmHi = 255;
+int pwmLo = 55;
 
 // Define motors pins (*15)
 const int motor0 =  13;
@@ -123,23 +125,40 @@ int toggle12State = HIGH;
 int toggle13State = HIGH;
 int toggle14State = HIGH;
 
-// Set the active interval (*15)
-//float t0 =  285;
-//float t1 =  290;
-//float t2 =  295;
-//float t3 =  185;
-//float t4 =  190;
-//float t5 =  195;
-//float t6 =  385;
-//float t7 =  390;
-//float t8 =  395;
-//float t9 =  125;
-//float t10 = 130;
-//float t11 = 135;
-//float t12 = 325;
-//float t13 = 330;
-//float t14 = 335;
 
+// Set modeA interval (*15)
+float modeAt0 =  10;
+float modeAt1 =  10;
+float modeAt2 =  10;
+float modeAt3 =  10;
+float modeAt4 =  10;
+float modeAt5 =  10;
+float modeAt6 =  10;
+float modeAt7 =  10;
+float modeAt8 =  10;
+float modeAt9 =  10;
+float modeAt10 = 10;
+float modeAt11 = 10;
+float modeAt12 = 10;
+float modeAt13 = 10;
+float modeAt14 = 10;
+
+// Set the active interval (*15)
+// float t0 =  285;
+// float t1 =  290;
+// float t2 =  295;
+// float t3 =  185;
+// float t4 =  190;
+// float t5 =  195;
+// float t6 =  385;
+// float t7 =  390;
+// float t8 =  395;
+// float t9 =  125;
+// float t10 = 130;
+// float t11 = 135;
+// float t12 = 325;
+// float t13 = 330;
+// float t14 = 335;
 float t0 =  10;
 float t1 =  10;
 float t2 =  10;
@@ -155,7 +174,6 @@ float t11 = 10;
 float t12 = 10;
 float t13 = 10;
 float t14 = 10;
-
 
 // Set the rest interval (*15)
 float t0rest =  215; 
@@ -231,6 +249,7 @@ int installationrest = 14; // pause (*trest)
 
 void setup()
 {
+  Serial.begin(9600);
   // declare output pins
   pinMode(motor0,OUTPUT);
   pinMode(motor1,OUTPUT);
@@ -250,21 +269,21 @@ void setup()
 }
 
 void loop() {
-  motorcontrol(metro0, motor0, motor0State, t0, t0rest, toggle0Pin, toggle0State, counter0, unit0, modeAgroup1);
-  motorcontrol(metro1, motor1, motor1State, t1, t1rest, toggle1Pin, toggle1State, counter1, unit0, modeAgroup1);
-  motorcontrol(metro2, motor2, motor2State, t2, t2rest, toggle2Pin, toggle2State, counter2, unit0, modeAgroup1);
-  motorcontrol(metro3, motor3, motor3State, t3, t3rest, toggle3Pin, toggle3State, counter3, unit1, modeAgroup1);
-  motorcontrol(metro4, motor4, motor4State, t4, t4rest, toggle4Pin, toggle4State, counter4, unit1, modeAgroup1);
-  motorcontrol(metro5, motor5, motor5State, t5, t5rest, toggle5Pin, toggle5State, counter5, unit1, modeAgroup2);
-  motorcontrol(metro6, motor6, motor6State, t6, t6rest, toggle6Pin, toggle6State, counter6, unit2, modeAgroup2);
-  motorcontrol(metro7, motor7, motor7State, t7, t7rest, toggle7Pin, toggle7State, counter7, unit2, modeAgroup2);
-  motorcontrol(metro8, motor8, motor8State, t8, t8rest, toggle8Pin, toggle8State, counter8, unit2, modeAgroup2);
-  motorcontrol(metro9, motor9, motor9State, t9, t9rest, toggle9Pin, toggle9State, counter9, unit3, modeAgroup2);
-  motorcontrol(metro10, motor10, motor10State, t10, t10rest, toggle10Pin, toggle10State, counter10, unit3, modeAgroup3);
-  motorcontrol(metro11, motor11, motor11State, t11, t11rest, toggle11Pin, toggle11State, counter11, unit3, modeAgroup3);
-  motorcontrol(metro12, motor12, motor12State, t12, t12rest, toggle12Pin, toggle12State, counter12, unit4, modeAgroup3);
-  motorcontrol(metro13, motor13, motor13State, t13, t13rest, toggle13Pin, toggle13State, counter13, unit4, modeAgroup3);
-  motorcontrol(metro14, motor14, motor14State, t14, t14rest, toggle14Pin, toggle14State, counter14, unit4, modeAgroup3);
+  motorcontrol(metro0, motor0, motor0State, t0, t0rest, toggle0Pin, toggle0State, counter0, unit0, modeAt0, modeAgroup1);
+  motorcontrol(metro1, motor1, motor1State, t1, t1rest, toggle1Pin, toggle1State, counter1, unit0, modeAt1, modeAgroup1);
+  motorcontrol(metro2, motor2, motor2State, t2, t2rest, toggle2Pin, toggle2State, counter2, unit0, modeAt2, modeAgroup1);
+  motorcontrol(metro3, motor3, motor3State, t3, t3rest, toggle3Pin, toggle3State, counter3, unit1, modeAt3, modeAgroup1);
+  motorcontrol(metro4, motor4, motor4State, t4, t4rest, toggle4Pin, toggle4State, counter4, unit1, modeAt4, modeAgroup1);
+  motorcontrol(metro5, motor5, motor5State, t5, t5rest, toggle5Pin, toggle5State, counter5, unit1, modeAt5, modeAgroup2);
+  motorcontrol(metro6, motor6, motor6State, t6, t6rest, toggle6Pin, toggle6State, counter6, unit2, modeAt6, modeAgroup2);
+  motorcontrol(metro7, motor7, motor7State, t7, t7rest, toggle7Pin, toggle7State, counter7, unit2, modeAt7, modeAgroup2);
+  motorcontrol(metro8, motor8, motor8State, t8, t8rest, toggle8Pin, toggle8State, counter8, unit2, modeAt8, modeAgroup2);
+  motorcontrol(metro9, motor9, motor9State, t9, t9rest, toggle9Pin, toggle9State, counter9, unit3, modeAt9, modeAgroup2);
+  motorcontrol(metro10, motor10, motor10State, t10, t10rest, toggle10Pin, toggle10State, counter10, unit3, modeAt10, modeAgroup3);
+  motorcontrol(metro11, motor11, motor11State, t11, t11rest, toggle11Pin, toggle11State, counter11, unit3, modeAt11, modeAgroup3);
+  motorcontrol(metro12, motor12, motor12State, t12, t12rest, toggle12Pin, toggle12State, counter12, unit4, modeAt12, modeAgroup3);
+  motorcontrol(metro13, motor13, motor13State, t13, t13rest, toggle13Pin, toggle13State, counter13, unit4, modeAt13, modeAgroup3);
+  motorcontrol(metro14, motor14, motor14State, t14, t14rest, toggle14Pin, toggle14State, counter14, unit4, modeAt14, modeAgroup3);
   
 }
 
@@ -276,11 +295,12 @@ void loop() {
 // usage example:
 // motorcontrol(metro0, motor0, motor0State, t0, t0rest, toggle0Pin, toggle0State, counter0, unit0, modeAgroup1);
 
-void motorcontrol(Metro& metro, int motor, int &motorState, float t, float trest, int togglePin, int toggleState, int &counter, int unit, boolean modeAgroup) {
+void motorcontrol(Metro& metro, int motor, int &motorState, float t, float trest, int togglePin, int toggleState, int &counter, int unit, float modeAt, boolean modeAgroup) {
   if (metro.check() == 1) { // check if the metro has passed its interval
 
     // see if installation of performance mode
     modeState = digitalRead(modePin);
+    Serial.println(modeState);
 
     // use third knob to control motor strength (pwm)
     knob2Value = 1023 - analogRead(knob2Pin); // invert because hooked up backwards
@@ -299,12 +319,15 @@ void motorcontrol(Metro& metro, int motor, int &motorState, float t, float trest
     // to turn motors on/off in either mode
     toggleState = digitalRead(togglePin); 
 
-    if( modeState == HIGH ) { // Performance Mode ON
+    if( modeState == HIGH ) { // BZBOWLS MODE ON
+
+      // NEW MODE FOR BZBOWLS
+      // on/off with separate PWM control for 3 groups of 5
       
       // use first knob to control note-on length (t)
-      knob0Value = 1023 - analogRead(knob0Pin); // invert because hooked up backwards
-      knob0Mapped = mapf(knob0Value, 0, 1023, 1, 8);
-      t = t*knob0Mapped;
+      // knob0Value = 1023 - analogRead(knob0Pin); // invert because hooked up backwards
+      // knob0Mapped = mapf(knob0Value, 0, 1023, 1, 8);
+      // t = t*knob0Mapped;
 
       // FSR sensor to control overall speed with fast/slow modes
       sensormodeState = digitalRead(sensormodePin);
@@ -315,54 +338,24 @@ void motorcontrol(Metro& metro, int motor, int &motorState, float t, float trest
       if( toggleState == LOW ) {
         motorState=off;
         analogWrite(motor,motorState);
-      } 
-      
-      if( toggleState == HIGH ) {
-        // NEW MODE FOR BZBOWLS
-        // on/off with separate PWM control for 3 groups of 5
-        
-        if(sensorValue > 0) {
-          if(sensormodeState == HIGH ) {
-          // sensor on fast mode
-            // make it go faster
-            sensorMapped = mapf(sensorValue, 0, 799, 1, 8);
+      } else if ( toggleState == HIGH ) { // if motor is switched on
 
-            if (motorState != off)  { 
-              motorState=off;
-              metro.interval(trest/sensorMapped); // rest between chirps
-            } else {
-              motorState=pwm;
-              metro.interval(t); // normal chirp speed. experiment with commenting this out.
-            }
-            analogWrite(motor,motorState);
-          } else {
-            // sensor on slow mode
-            // make it go slower
-            sensorMapped = mapf(sensorValue, 0, 799, 1, 30);
-            if (motorState != off)  { 
-              motorState=off;
-              metro.interval(trest*sensorMapped); // rest between chirps
-            } else {
-              motorState=pwm;
-              metro.interval(t); // original chirp speed
-            }
-            analogWrite(motor,motorState);            
-          } // end if sensor in use
-        } else { // no sensor
-          if (motorState != off)  { 
-            motorState=off;
-            metro.interval(trest); // rest between chirps
-          } else {
-            motorState=pwm;
-            metro.interval(t); // original chirp speed
+        if(sensorValue > 0) { // if sensor activated
+          if(sensormodeState == HIGH ) { // and set to high
+            pwm = pwmHi;
+          } else if ( sensormodeState == LOW ) {
+            pwm = pwmLo;
           }
-          analogWrite(motor,motorState);
         }
-      } // end toggle state high
+        motorState=pwm;
+        analogWrite(motor,motorState);
+      }
+    } // end toggle state high
     // end performance mode
-    } 
+    
     
     if( modeState == LOW ) {
+
       // use first knob to control note-on length (t)
       knob0Value = 1023 - analogRead(knob0Pin); // invert because hooked up backwards
       knob0Mapped = mapf(knob0Value, 0, 1023, 1, 8);
@@ -421,60 +414,8 @@ void motorcontrol(Metro& metro, int motor, int &motorState, float t, float trest
       } // end toggle state high
       // end performance mode
 
-    } else {
-      // this won't ever happen btw
-      // INSTALLATION MODE (performance mode off)
-      // installation settings
-      t0 =  105;
-      t1 =  110;
-      t2 =  115;
-      t3 =  105;
-      t4 =  110;
-      t5 =  115;
-      t6 =  105;
-      t7 =  110;
-      t8 =  115;
-      t9 =  105;
-      t10 = 110;
-      t11 = 115;
-      t12 = 105;
-      t13 = 110;
-      t14 = 115;
-      // trest determined by knob2
-      
-      if( toggleState == LOW ) {
-        motorState=off;
-        analogWrite(motor,motorState);
-      } 
-      if( toggleState == HIGH ) {
- 
-        // motor on
-        if( counter % unit == 0 ) {
-          // do something special
-          int randomize = random(0,2);
-          if (randomize == 0) { // can either do a sustain or a pause
-            motorState=off;
-            metro.interval(trest*installationgp); // big ass pause
-          } else {
-            motorState=pwmgp;
-            metro.interval(trest*installationgp); // t*installationgp // big ass sustain      
-          }      
-          analogWrite(motor,motorState);     
-        } else {
-          // do something normal -- chirps
-          // make this fancier
-          if (motorState != off)  { 
-            motorState=off;
-            metro.interval(trest*installationrest); // rest between chirps
-          } else {
-            motorState=pwm;
-            metro.interval(t); // original chirp speed
-          }
-          analogWrite(motor,motorState);
-        }
-        counter = counter+1;
-      } // end togglestate check
-    } // end mode check
+    }
+
   } // end metro check
   
 } // end of motorcontrol function
