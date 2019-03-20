@@ -54,13 +54,14 @@ float knob2Mapped = 0;
 // Set ideal pwm level
 int off = 0;
 int pwm = 255;
-int pwmgp = 60;
+int pwmgp = 50;
 int on = 255;
-int pwmHi = 255;
-int pwmLo = 50;
+//int pwmHi = 255;
+//int pwmLo = 50;
 int pwm1 = pwm;
 int pwm2 = pwm;
 int pwm3 = pwm;
+//int pwmSensor = pwm;
 
 //ModeA Groups
 int modeAgroup1 = 1;
@@ -136,38 +137,38 @@ int toggle13State = HIGH;
 int toggle14State = HIGH;
 
 // Set the active interval (*15)
- float t0 =  285;
- float t1 =  290;
- float t2 =  295;
- float t3 =  185;
- float t4 =  190;
- float t5 =  195;
- float t6 =  385;
- float t7 =  390;
- float t8 =  395;
- float t9 =  125;
- float t10 = 130;
- float t11 = 135;
- float t12 = 325;
- float t13 = 330;
- float t14 = 335;
+ float t0 =  125;
+ float t1 =  130;
+ float t2 =  135;
+ float t3 =  140;
+ float t4 =  145;
+ float t5 =  150;
+ float t6 =  155;
+ float t7 =  160;
+ float t8 =  165;
+ float t9 =  170;
+ float t10 = 175;
+ float t11 = 180;
+ float t12 = 185;
+ float t13 = 190;
+ float t14 = 195;
 
 // Set the rest interval (*15)
-float t0rest =  215; 
-float t1rest =  220; 
-float t2rest =  225; 
-float t3rest =  125; 
-float t4rest =  130; 
-float t5rest =  135; 
-float t6rest =  145; 
-float t7rest =  150; 
-float t8rest =  155; 
-float t9rest =  95; 
-float t10rest = 100; 
-float t11rest = 105; 
-float t12rest = 85; 
+float t0rest =  155; 
+float t1rest =  150; 
+float t2rest =  145; 
+float t3rest =  140; 
+float t4rest =  135; 
+float t5rest =  130; 
+float t6rest =  125; 
+float t7rest =  120; 
+float t8rest =  115; 
+float t9rest =  110; 
+float t10rest = 105; 
+float t11rest = 100; 
+float t12rest = 95; 
 float t13rest = 90; 
-float t14rest = 95; 
+float t14rest = 85; 
 
 // Instatiate metro object  (*15)
 Metro metro0 =  Metro(t0); 
@@ -209,10 +210,10 @@ int counter14 = 1;
 
 // how many times to do pattern before it reevaluates itself (way arbitrary)
 //ModeB
-int unit0 = 9;
-int unit1 = 5;
-int unit2 = 3;
-int unit3 = 7;
+int unit0 = 5;
+int unit1 = 3;
+int unit2 = 7;
+int unit3 = 9;
 int unit4 = 12;
 
 // installation time multiplier
@@ -221,7 +222,7 @@ int installationrest = 14; // pause (*trest)
 
 void setup()
 {
-  Serial.begin(9600);
+  //Serial.begin(9600);
   // declare output pins
   pinMode(motor0,OUTPUT);
   pinMode(motor1,OUTPUT);
@@ -244,20 +245,20 @@ void loop() {
   motorcontrol(metro0, motor0, motor0State, t0, t0rest, toggle0Pin, toggle0State, counter0, unit0, modeAgroup1);
   motorcontrol(metro1, motor1, motor1State, t1, t1rest, toggle1Pin, toggle1State, counter1, unit0, modeAgroup1);
   motorcontrol(metro2, motor2, motor2State, t2, t2rest, toggle2Pin, toggle2State, counter2, unit0, modeAgroup1);
-  motorcontrol(metro3, motor3, motor3State, t3, t3rest, toggle3Pin, toggle3State, counter3, unit1, modeAgroup1);
-  motorcontrol(metro4, motor4, motor4State, t4, t4rest, toggle4Pin, toggle4State, counter4, unit1, modeAgroup1);
+  motorcontrol(metro3, motor3, motor3State, t3, t3rest, toggle3Pin, toggle3State, counter3, unit0, modeAgroup1);
+  motorcontrol(metro4, motor4, motor4State, t4, t4rest, toggle4Pin, toggle4State, counter4, unit0, modeAgroup1);
 
   motorcontrol(metro5, motor5, motor5State, t5, t5rest, toggle5Pin, toggle5State, counter5, unit1, modeAgroup2);
-  motorcontrol(metro6, motor6, motor6State, t6, t6rest, toggle6Pin, toggle6State, counter6, unit2, modeAgroup2);
-  motorcontrol(metro7, motor7, motor7State, t7, t7rest, toggle7Pin, toggle7State, counter7, unit2, modeAgroup2);
-  motorcontrol(metro8, motor8, motor8State, t8, t8rest, toggle8Pin, toggle8State, counter8, unit2, modeAgroup2);
-  motorcontrol(metro9, motor9, motor9State, t9, t9rest, toggle9Pin, toggle9State, counter9, unit3, modeAgroup2);
+  motorcontrol(metro6, motor6, motor6State, t6, t6rest, toggle6Pin, toggle6State, counter6, unit1, modeAgroup2);
+  motorcontrol(metro7, motor7, motor7State, t7, t7rest, toggle7Pin, toggle7State, counter7, unit1, modeAgroup2);
+  motorcontrol(metro8, motor8, motor8State, t8, t8rest, toggle8Pin, toggle8State, counter8, unit1, modeAgroup2);
+  motorcontrol(metro9, motor9, motor9State, t9, t9rest, toggle9Pin, toggle9State, counter9, unit1, modeAgroup2);
 
-  motorcontrol(metro10, motor10, motor10State, t10, t10rest, toggle10Pin, toggle10State, counter10, unit3, modeAgroup3);
-  motorcontrol(metro11, motor11, motor11State, t11, t11rest, toggle11Pin, toggle11State, counter11, unit3, modeAgroup3);
-  motorcontrol(metro12, motor12, motor12State, t12, t12rest, toggle12Pin, toggle12State, counter12, unit4, modeAgroup3);
-  motorcontrol(metro13, motor13, motor13State, t13, t13rest, toggle13Pin, toggle13State, counter13, unit4, modeAgroup3);
-  motorcontrol(metro14, motor14, motor14State, t14, t14rest, toggle14Pin, toggle14State, counter14, unit4, modeAgroup3);
+  motorcontrol(metro10, motor10, motor10State, t10, t10rest, toggle10Pin, toggle10State, counter10, unit2, modeAgroup3);
+  motorcontrol(metro11, motor11, motor11State, t11, t11rest, toggle11Pin, toggle11State, counter11, unit2, modeAgroup3);
+  motorcontrol(metro12, motor12, motor12State, t12, t12rest, toggle12Pin, toggle12State, counter12, unit2, modeAgroup3);
+  motorcontrol(metro13, motor13, motor13State, t13, t13rest, toggle13Pin, toggle13State, counter13, unit2, modeAgroup3);
+  motorcontrol(metro14, motor14, motor14State, t14, t14rest, toggle14Pin, toggle14State, counter14, unit2, modeAgroup3);
   
 }
 
@@ -319,9 +320,9 @@ void motorcontrol(Metro& metro, int motor, int &motorState, float t, float trest
         if(sensorValue > 0) { 
           // if sensor activated, assign PWM level according to sensor mode
           if(sensormodeState == HIGH ) { // and set to high
-            pwm = pwmHi;
+            pwm = map(sensorValue,0,750,20,255);
           } else if ( sensormodeState == LOW ) {
-            pwm = pwmLo;
+            pwm = map(sensorValue,0,750,255,20);
           }
         } else {
           // if sensor unused, assign pwm level according to group
@@ -369,66 +370,80 @@ void motorcontrol(Metro& metro, int motor, int &motorState, float t, float trest
       sensorValue = sensorValue / 1309; // "ease in-out"
          
       if( toggleState == LOW ) {
-        // motorState=off;
-        // analogWrite(motor,motorState);
+         motorState=off;
+         analogWrite(motor,motorState);
         // "installation mode"
         // motor on
-        if( counter % unit == 0 ) {
-          // do something special
-          int randomize = random(0,2);
-          if (randomize == 0) { // can either do a sustain or a pause
-            motorState=off;
-            metro.interval(trest*installationgp); // big ass pause
-          } else {
-            motorState=pwmgp;
-            metro.interval(trest*installationgp); // t*installationgp // big ass sustain      
-          }      
-          analogWrite(motor,motorState);     
-        } else {
-          // do something normal -- chirps
-          // make this fancier
-          if (motorState != off)  { 
-            motorState=off;
-            metro.interval(trest*installationrest); // rest between chirps
-          } else {
-            motorState=pwm;
-            metro.interval(t); // original chirp speed
-          }
-          analogWrite(motor,motorState);
-        }
-        counter = counter+1;
+//        if( counter % unit == 0 ) {
+//          // do something special
+//          int randomize = random(0,2);
+//          if (randomize == 0) { // can either do a sustain or a pause
+//            motorState=off;
+//            metro.interval(trest*installationgp); // big ass pause
+//          } else {
+//            motorState=pwmgp;
+//            metro.interval(trest*installationgp); // t*installationgp // big ass sustain      
+//          }      
+//          analogWrite(motor,motorState);   
+//        } else {
+//          // do something normal -- chirps
+//          // make this fancier
+//          if (motorState != off)  { 
+//            motorState=off;
+//            metro.interval(trest*installationrest); // rest between chirps
+//          } else {
+//            motorState=pwm;
+//            metro.interval(t); // original chirp speed
+//          }
+//          analogWrite(motor,motorState);
+//        }
+//        counter = counter+1;
       } 
       
       if( toggleState == HIGH ) {
- 
-        if(sensorValue > 0) {
-          if(sensormodeState == HIGH ) {
-          // sensor on fast mode
-            // make it go faster
-            sensorMapped = mapf(sensorValue, 0, 799, 1, 8);
-
-            if (motorState != off)  { 
-              motorState=off;
-              metro.interval(trest/sensorMapped); // rest between chirps
-            } else {
-              motorState=pwm;
-              metro.interval(t); // original chirp speed
-            }
-            analogWrite(motor,motorState);
+        if(sensormodeState == HIGH ) {
+          if(sensorValue > 0) {
+            pwm = map(sensorValue,0,750,20,255);
           } else {
-            // sensor on slow mode
-            // make it go slower
-            sensorMapped = mapf(sensorValue, 0, 799, 1, 30);
-            if (motorState != off)  { 
-              motorState=off;
-              metro.interval(trest*sensorMapped); // rest between chirps
-            } else {
-              motorState=pwm;
-              metro.interval(t); // original chirp speed
-            }
-            analogWrite(motor,motorState);            
-          } // end if sensor in use
-        } else { // no sensor
+            pwm = knob2Mapped;
+          }
+        } else {
+          if(sensorValue > 0) {
+            pwm = map(sensorValue,0,750,255,20);
+          } else {
+            pwm = knob2Mapped;
+          }
+        }
+//        if(sensorValue > 0) {
+//          pwmSensor = map(sensorValue,0,600,40,255);
+//          
+//          if(sensormodeState == HIGH ) {
+//          // sensor on fast mode
+//            // make it go faster
+//            sensorMapped = mapf(sensorValue, 0, 799, 1, 8);
+//
+//            if (motorState != off)  { 
+//              motorState=off;
+//              metro.interval(trest/sensorMapped); // rest between chirps
+//            } else {
+//              motorState=pwm;
+//              metro.interval(t); // original chirp speed
+//            }
+//            analogWrite(motor,motorState);
+//          } else {
+//            // sensor on slow mode
+//            // make it go slower
+//            sensorMapped = mapf(sensorValue, 0, 799, 1, 30);
+//            if (motorState != off)  { 
+//              motorState=off;
+//              metro.interval(trest*sensorMapped); // rest between chirps
+//            } else {
+//              motorState=pwm;
+//              metro.interval(t); // original chirp speed
+//            }
+//            analogWrite(motor,motorState);            
+//          } // end if sensor in use
+//        } else { // no sensor
           if (motorState != off)  { 
             motorState=off;
             metro.interval(trest); // rest between chirps
@@ -437,7 +452,7 @@ void motorcontrol(Metro& metro, int motor, int &motorState, float t, float trest
             metro.interval(t); // original chirp speed
           }
           analogWrite(motor,motorState);
-        }
+        //}
       } // end toggle state high
       // end performance mode
 
