@@ -319,9 +319,9 @@ void motorcontrol(Metro& metro, int motor, int &motorState, float t, float trest
       } else if ( toggleState == HIGH ) { // if motor is switched on
         if(sensorValue > 0) { 
           // if sensor activated, assign PWM level according to sensor mode
-          if(sensormodeState == HIGH ) { // and set to high
+          if(sensormodeState == LOW ) { // and set to high
             pwm = map(sensorValue,0,750,20,255);
-          } else if ( sensormodeState == LOW ) {
+          } else if ( sensormodeState == HIGH ) {
             pwm = map(sensorValue,0,750,255,20);
           }
         } else {
@@ -372,36 +372,10 @@ void motorcontrol(Metro& metro, int motor, int &motorState, float t, float trest
       if( toggleState == LOW ) {
          motorState=off;
          analogWrite(motor,motorState);
-        // "installation mode"
-        // motor on
-//        if( counter % unit == 0 ) {
-//          // do something special
-//          int randomize = random(0,2);
-//          if (randomize == 0) { // can either do a sustain or a pause
-//            motorState=off;
-//            metro.interval(trest*installationgp); // big ass pause
-//          } else {
-//            motorState=pwmgp;
-//            metro.interval(trest*installationgp); // t*installationgp // big ass sustain      
-//          }      
-//          analogWrite(motor,motorState);   
-//        } else {
-//          // do something normal -- chirps
-//          // make this fancier
-//          if (motorState != off)  { 
-//            motorState=off;
-//            metro.interval(trest*installationrest); // rest between chirps
-//          } else {
-//            motorState=pwm;
-//            metro.interval(t); // original chirp speed
-//          }
-//          analogWrite(motor,motorState);
-//        }
-//        counter = counter+1;
       } 
       
       if( toggleState == HIGH ) {
-        if(sensormodeState == HIGH ) {
+        if(sensormodeState == LOW ) {
           if(sensorValue > 0) {
             pwm = map(sensorValue,0,750,20,255);
           } else {
@@ -414,45 +388,16 @@ void motorcontrol(Metro& metro, int motor, int &motorState, float t, float trest
             pwm = knob2Mapped;
           }
         }
-//        if(sensorValue > 0) {
-//          pwmSensor = map(sensorValue,0,600,40,255);
-//          
-//          if(sensormodeState == HIGH ) {
-//          // sensor on fast mode
-//            // make it go faster
-//            sensorMapped = mapf(sensorValue, 0, 799, 1, 8);
-//
-//            if (motorState != off)  { 
-//              motorState=off;
-//              metro.interval(trest/sensorMapped); // rest between chirps
-//            } else {
-//              motorState=pwm;
-//              metro.interval(t); // original chirp speed
-//            }
-//            analogWrite(motor,motorState);
-//          } else {
-//            // sensor on slow mode
-//            // make it go slower
-//            sensorMapped = mapf(sensorValue, 0, 799, 1, 30);
-//            if (motorState != off)  { 
-//              motorState=off;
-//              metro.interval(trest*sensorMapped); // rest between chirps
-//            } else {
-//              motorState=pwm;
-//              metro.interval(t); // original chirp speed
-//            }
-//            analogWrite(motor,motorState);            
-//          } // end if sensor in use
-//        } else { // no sensor
-          if (motorState != off)  { 
-            motorState=off;
-            metro.interval(trest); // rest between chirps
-          } else {
-            motorState=pwm;
-            metro.interval(t); // original chirp speed
-          }
-          analogWrite(motor,motorState);
-        //}
+
+        if (motorState != off)  { 
+          motorState=off;
+          metro.interval(trest); // rest between chirps
+        } else {
+          motorState=pwm;
+          metro.interval(t); // original chirp speed
+        }
+        analogWrite(motor,motorState);
+        
       } // end toggle state high
       // end performance mode
 
